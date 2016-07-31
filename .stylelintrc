@@ -1,0 +1,12 @@
+{
+  "rules": {
+	"color-hex-case": "lower",
+	"declaration-block-no-duplicate-properties": true,
+	"font-weight-notation": "numeric",
+    "indentation": "tab",
+    "max-empty-lines": 3,
+    "no-extra-semicolons": true,
+    "selector-list-comma-newline-after": "always",
+    "selector-pseudo-element-colon-notation": "double",
+  },
+}

@@ -1,0 +1,13 @@
+{
+  "name": "CSS Core",
+  "version": "0.1.0",
+  "homepage": "https://github.com/calebzahnd/css-core",
+  "authors": [
+    "Caleb Zahnd"
+  ],
+  "description": "Front End framework for Lee County V2",
+  "private": true,
+  "dependencies": {
+    "normalize-scss": "^3.0.3"
+  }
+}

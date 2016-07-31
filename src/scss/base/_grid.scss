@@ -1,0 +1,42 @@
+/**************/
+/* Grid Mixins
+/**************/
+
+// Useful mixins downloaded from https://bitbucket.org/calebzahnd/sass-mixins
+
+@mixin container($width: $global--width) {
+	max-width: $width;
+	margin: 0 auto;
+}
+
+@mixin container-flex($width: $global--width) {
+	@include container($width);
+	display: flex;
+}
+
+@function gutters($gutters: $global--gutters) {
+	@return $gutters;
+}
+
+@mixin gutters($gutters: $global--gutters) {
+	padding-left: gutters();
+	padding-right: gutters();
+}
+
+@function span($columns: $global--columns, $container: $global--columns) {
+	@return percentage($columns / $container);
+}
+
+@mixin span($columns: $global--columns, $container: $global--columns) {
+	width: span($columns, $container);
+	float: left;
+	@include gutters();
+}
+
+@mixin push($columns: $global--columns, $container: $global--columns) {
+	margin-left: span($columns, $container);
+}
+
+@mixin pull($columns: $global--columns, $container: $global--columns) {
+	margin-left: (span($columns, $container) * -1);
+}

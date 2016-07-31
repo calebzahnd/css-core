@@ -1,0 +1,15 @@
+/*******/
+/* HTML
+/*******/
+
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+	box-sizing: border-box;
+	font-size:62.5%; //62.5% is recommended to we can easily use REM values and generate a px fallback.
+}
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	outline: none;
+}

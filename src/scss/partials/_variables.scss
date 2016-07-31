@@ -1,0 +1,56 @@
+/*-----------*/
+/* Variables
+/*-----------*/
+
+//Max site width:
+$global--width:		1200px;
+$global--columns:	12;
+$global--gutters:	15px;
+
+//The Grid
+$grid-breakpoints: (
+	xs: 0,
+	sm: 544px,
+	md: 768px,
+	lg: 992px,
+	xl: 1200px
+);
+
+//Colors
+$colors: (
+	black:			#000000,
+	white:			#ffffff,
+	
+	gray-lightest:	#ededed,
+	gray-lighter:	#d9d9d9,
+	gray-light:		#b2b2b2,
+	gray:			#707070,
+	
+	form-gray:		#cccccc,
+	
+	blue-dark:		#075485,
+	blue:			#0095b5,
+	blue-light:		#99d5e1,
+	orange:			#ed6300,
+	sand:			#f5f1dc,
+	green:			#6e9113,
+	
+	red:			#e33333, //This is just for form validation. Not a brand color.
+	
+);
+
+
+	
+
+
+//Z-Index Management -- utilizes Sass Maps
+//Easiest way to use is via the mixin: @include z-index(zero);
+$z-index: (
+	heaven					:	9999,
+	modal					:	5000,
+	aboveground				:	100,
+	ground					:	1,
+	zero					:	0,
+	underground				:	-1,
+	hell					:	-9000
+);
