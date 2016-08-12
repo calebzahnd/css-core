@@ -225,14 +225,6 @@
 	}
 }
 
-
-
-@mixin gutters($amount: 1) {
-	$padding: floor($global--gutters * $amount);
-	padding-left: $padding;
-	padding-right: $padding;
-}
-
 @function parseInt($n) {
 	@return $n / ($n * 0 + 1);
 }
