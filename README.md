@@ -1,6 +1,6 @@
 # CSS Core
 
-CSS Core is a very simple, lightweight alternative to larger frameworks such as Bootstrap and grid systems like Susy. It is built with the belief that markup should be mean and lean and layout should be controlled in stylesheets, not a bunch of classes.
+CSS Core is a very simple, lightweight alternative to larger frameworks such as Bootstrap and grid systems like Susy. It is an opinionated system, built with the belief that markup should be mean and lean and layout should be controlled in stylesheets, not a bunch of classes.
 
 ## Usage
 
