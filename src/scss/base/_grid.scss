@@ -2,8 +2,6 @@
 /* Grid Mixins
 /**************/
 
-// Useful mixins downloaded from https://bitbucket.org/calebzahnd/sass-mixins
-
 @mixin container($width: $global--width) {
 	max-width: $width;
 	margin: 0 auto;
