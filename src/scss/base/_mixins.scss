@@ -155,118 +155,82 @@
 	}
 }
 
+// Sass function map-get-next
+// From https://gist.github.com/agorilla/9df052eb1e15d8aea446
+@function map-get-next($map, $key, $fallback: false) {
 
-//Custom breakpoint names
-@mixin screen-xs {
-	@media only screen and (min-width: map-get($grid-breakpoints, xs)) {
-		@content;
-	}
-}
-@mixin screen-sm {
-	@media only screen and (min-width: map-get($grid-breakpoints, sm)) {
-		@content;
-	}
-}
-@mixin screen-md {
-	@media only screen and (min-width: map-get($grid-breakpoints, md)) {
-		@content;
-	}
-}
-@mixin screen-lg {
-	@media only screen and (min-width: map-get($grid-breakpoints, lg)) {
-		@content;
-	}
-}
-@mixin screen-xl {
-	@media only screen and (min-width: map-get($grid-breakpoints, xl)) {
-		@content;
-	}
-}
+	// Check if map is valid
+	@if type_of($map) == map {
 
+		// Check if key exists in map
+		@if map_has_key($map, $key) {
 
-@mixin screen-xs-max {
-	@media only screen and (max-width: (map-get($grid-breakpoints, sm) - 1)) {
-		@content;
-	}
-}
-@mixin screen-sm-max {
-	@media only screen and (max-width: (map-get($grid-breakpoints, md) - 1)) {
-		@content;
-	}
-}
-@mixin screen-md-max {
-	@media only screen and (max-width: (map-get($grid-breakpoints, lg) - 1)) {
-		@content;
-	}
-}
-@mixin screen-lg-max {
-	@media only screen and (max-width: (map-get($grid-breakpoints, xl) - 1)) {
-		@content;
-	}
-}
+			// Init index counter variable
+			$i: 0;
 
+			// Init key index
+			$key-index: false;
 
-@mixin screen-xs-only {
-	@media only screen and (min-width: map-get($grid-breakpoints, xs)) and (max-width: (map-get($grid-breakpoints, sm) - 1)) {
-		@content;
+			// Traverse map for key
+			@each $map-key, $map-value in $map {
+				// Update index
+				$i: $i + 1;
+
+				// If map key found, set key index
+				@if $map-key == $key {
+					$key-index: $i;
+				}
+
+				// If next index return next value
+				@if $i == $key-index + 1 {
+					@return $map-value;
+				}
+
+				// If last entry return false
+				@if $i == length($map) {
+					@return $fallback;
+				}
+			}
+
+			@warn 'No next map item for key #{$key}';
+			@return $fallback;
+		}
+
+		@warn 'No valid key #{$key} in map';
+		@return $fallback;
 	}
-}
-@mixin screen-sm-only {
-	@media only screen and (min-width: map-get($grid-breakpoints, sm)) and (max-width: (map-get($grid-breakpoints, md) - 1)) {
-		@content;
-	}
-}
-@mixin screen-md-only {
-	@media only screen and (min-width: map-get($grid-breakpoints, md)) and (max-width: (map-get($grid-breakpoints, lg) - 1)) {
-		@content;
-	}
-}
-@mixin screen-lg-only {
-	@media only screen and (min-width: map-get($grid-breakpoints, lg)) and (max-width: (map-get($grid-breakpoints, xl) - 1)) {
-		@content;
-	}
-}
-@mixin screen-xl-only {
-	@include  screen-xl {
-		@content;
-	}
+
+	@warn 'No valid map';
+	@return $fallback;
 }
 
 
-@mixin gutter($location, $amount: 1) {
+//Custom breakpoint mixin
+@mixin screen($breakpoint, $query: 'min') {
+	@if ($query == 'min') {		
+		@media only screen and (min-width: map-get($grid-breakpoints, $breakpoint)) {
+			@content;
+		}
+	}
+	@if ($query == 'max') {
+		@media only screen and (max-width: (map-get-next($grid-breakpoints, $breakpoint) - 1)) {
+			@content;
+		}
+	}
 	
-	$margin: floor($grid-gutter-width * $amount);
-	
-	@if $location == "all" {
-		margin: $margin;
+	@if ($query == 'only') {
+		@media only screen and (min-width: map-get($grid-breakpoints, $breakpoint)) and (max-width: (map-get-next($grid-breakpoints, $breakpoint) - 1)) {
+			@content;
+		}
 	}
-	@if $location == "top" {
-		margin-top: $margin;
-	}
-	@if $location == "right" {
-		margin-right: $margin;
-	}
-	@if $location == "bottom" {
-		margin-bottom: $margin;
-	}
-	@if $location == "left" {
-		margin-left: $margin;
-	}
-	@if $location == "internal" {
-		padding: $margin;
-	}
-	@if $location == "internal-top" {
-		padding-top: $margin;
-	}
-	@if $location == "internal-right" {
-		padding-right: $margin;
-	}
-	@if $location == "internal-bottom" {
-		padding-bottom: $margin;
-	}
-	@if $location == "internal-left" {
-		padding-left: $margin;
-	}
+}
+
+
+
+@mixin gutters($amount: 1) {
+	$padding: floor($global--gutters * $amount);
+	padding-left: $padding;
+	padding-right: $padding;
 }
 
 @function parseInt($n) {
